@@ -1,9 +1,9 @@
-package com.validate.rules;
+package com.validate.password.rules;
 
-import com.validate.exception.PasswordValidationException;
-import com.validate.password.PasswordValidatorRule;
+import com.validate.password.exception.PasswordValidationException;
+import com.validate.password.validator.PasswordValidatorRule;
 
-public class LengthValidatorRule implements PasswordValidatorRule {
+public class LengthValidator implements PasswordValidatorRule {
     @Override
     public void validate(String password) throws PasswordValidationException {
         if (password.length() <= 8) {

@@ -1,10 +1,10 @@
-package com.validate.rules;
+package com.validate.password.rules;
 
 import ch.qos.logback.core.util.StringUtil;
-import com.validate.exception.PasswordValidationException;
-import com.validate.password.PasswordValidatorRule;
+import com.validate.password.exception.PasswordValidationException;
+import com.validate.password.validator.PasswordValidatorRule;
 
-public class NullOrEmptyValidatorRule implements PasswordValidatorRule {
+public class NullOrEmptyValidator implements PasswordValidatorRule {
 
 
     @Override

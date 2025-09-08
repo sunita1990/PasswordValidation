@@ -1,4 +1,4 @@
-package com.validate.exception;
+package com.validate.password.exception;
 
 public class PasswordValidationException extends Exception{
 

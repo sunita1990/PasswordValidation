@@ -1,9 +1,9 @@
-package com.validate.rules;
+package com.validate.password.rules;
 
-import com.validate.exception.PasswordValidationException;
-import com.validate.password.PasswordValidatorRule;
+import com.validate.password.exception.PasswordValidationException;
+import com.validate.password.validator.PasswordValidatorRule;
 
-public class NumberValidatorRule implements PasswordValidatorRule {
+public class ContainsNumberValidator implements PasswordValidatorRule {
     public final String ONE_NUMBER_REGEX = ".*[0-9].*";
 
     @Override

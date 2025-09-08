@@ -1,6 +1,6 @@
-package com.validate.password;
+package com.validate.password.validator;
 
-import com.validate.exception.PasswordValidationException;
+import com.validate.password.exception.PasswordValidationException;
 
 public interface PasswordValidatorRule {
 
