@@ -26,7 +26,7 @@ class PasswordValidationServiceTests {
     }
 
     @Test()
-    public void passwordIsNullFailureTest() throws PasswordValidationException {
+    public void passwordIsEmptyFailureTest() {
         PasswordValidationException resultException = Assertions.assertThrows(PasswordValidationException.class, () -> {
             passwordValidationService.validate("");
 
@@ -35,7 +35,16 @@ class PasswordValidationServiceTests {
     }
 
     @Test()
-    public void passwordNoLowercaseFailureTest() throws PasswordValidationException {
+    public void passwordIsNullFailureTest() {
+        PasswordValidationException resultException = Assertions.assertThrows(PasswordValidationException.class, () -> {
+            passwordValidationService.validate(null);
+
+        });
+        assertThat("Password cannot be Null or Empty.").isEqualTo(resultException.getMessage());
+    }
+
+    @Test()
+    public void passwordNoLowercaseFailureTest() {
 
         PasswordValidationException resultException = Assertions.assertThrows(PasswordValidationException.class, () -> {
             passwordValidationService.validate("PASSWORD!@");
