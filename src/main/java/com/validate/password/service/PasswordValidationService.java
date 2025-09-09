@@ -8,10 +8,11 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 
 public class PasswordValidationService {
-    private  final Logger log = LoggerFactory.getLogger(PasswordValidationService.class);
+    private static final Logger log = LoggerFactory.getLogger(PasswordValidationService.class);
 
     private final List<PasswordValidatorRule> atLeastOneRules ; //List for checking atLeast one validation
     private final List<PasswordValidatorRule> mandatoryRules ; //List for checking atLeast mandatory validation
@@ -24,7 +25,12 @@ public class PasswordValidationService {
 
     public static void main(String[] args) throws PasswordValidationException {
         PasswordValidationService PasswordValidationService =new PasswordValidationService();
-        PasswordValidationService.validate("validator");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the password");
+        String inputPassword= scanner.nextLine();
+        System.out.println("Input Password is::, "+ inputPassword);
+        boolean validationResult = PasswordValidationService.validate(inputPassword);
+        log.info("Password Validation is successful or not::{}",validationResult);
 
     }
 
@@ -40,7 +46,7 @@ public class PasswordValidationService {
                 validator.validate(password);
                 count++;
             } catch (PasswordValidationException e) {
-                log.error("in exception");
+                log.error("in catch exception::{}", e.getMessage());
             }
         }
         return count >= 1;
