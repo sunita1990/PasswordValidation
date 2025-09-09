@@ -2,7 +2,6 @@ package com.validate.password.rules;
 
 import ch.qos.logback.core.util.StringUtil;
 import com.validate.password.exception.PasswordValidationException;
-import com.validate.password.validator.PasswordValidatorRule;
 
 public class NullOrEmptyValidator implements PasswordValidatorRule {
 

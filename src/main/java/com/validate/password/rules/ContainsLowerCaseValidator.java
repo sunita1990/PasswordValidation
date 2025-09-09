@@ -1,7 +1,6 @@
 package com.validate.password.rules;
 
 import com.validate.password.exception.PasswordValidationException;
-import com.validate.password.validator.PasswordValidatorRule;
 
 public class ContainsLowerCaseValidator implements PasswordValidatorRule {
     public final String ONE_LOWER_CASE_REGEX = ".*[a-z].*";

@@ -19,14 +19,13 @@ Password contains at least one lowercase
 For handling user defined exception for rules.
 
 ## Rules
-NullOrEmptyValidator - File for validating if password is not null or blank.
-LengthValidator - file for validating if password is larger than 8 or not.
-ContainsUpperCaseValidator - file for validating if password has atl east one upper case.
-ContainsLowerCaseValidator - file for validating if password has at least one lower case
-ContainsNumberValidator - file for validating if password contains at least one number.
+* **PasswordValidatorRule** - It is an interface contains validate method which is implemented by all rules classes.
+* **NullOrEmptyValidator** - File for validating if password is not null or blank.
+* **LengthValidator** - file for validating if password is larger than 8 or not.
+* **ContainsUpperCaseValidator** - file for validating if password has atl east one upper case.
+* **ContainsLowerCaseValidator** - file for validating if password has at least one lower case
+* **ContainsNumberValidator** - file for validating if password contains at least one number.
 
 ## Service
 contains method validate the password Validation Rules.
 
-## Validator
-It is an interface contains validate method which is implemented by all rules classes.

@@ -1,4 +1,4 @@
-package com.validate.password.validator;
+package com.validate.password.rules;
 
 import com.validate.password.exception.PasswordValidationException;
 

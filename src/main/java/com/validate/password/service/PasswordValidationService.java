@@ -1,7 +1,7 @@
 package com.validate.password.service;
 
 import com.validate.password.exception.PasswordValidationException;
-import com.validate.password.validator.PasswordValidatorRule;
+import com.validate.password.rules.PasswordValidatorRule;
 import com.validate.password.rules.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,18 +11,24 @@ import java.util.List;
 
 
 public class PasswordValidationService {
-    private static final Logger log = LoggerFactory.getLogger(PasswordValidationService.class);
+    private  final Logger log = LoggerFactory.getLogger(PasswordValidationService.class);
+
+    private final List<PasswordValidatorRule> atLeastOneRules ; //List for checking atLeast one validation
+    private final List<PasswordValidatorRule> mandatoryRules ; //List for checking atLeast mandatory validation
+
+    public PasswordValidationService() {
+
+        this.atLeastOneRules = Arrays.asList(new LengthValidator(), new ContainsUpperCaseValidator(), new ContainsNumberValidator());
+        this.mandatoryRules = Arrays.asList(new NullOrEmptyValidator(), new ContainsLowerCaseValidator());
+    }
+
     public static void main(String[] args) throws PasswordValidationException {
-        validate("validator");
+        PasswordValidationService PasswordValidationService =new PasswordValidationService();
+        PasswordValidationService.validate("validator");
 
     }
 
-    public static boolean validate(String password) throws PasswordValidationException {
-        //List for checking atLeast one validation
-        List<PasswordValidatorRule> atLeastOneRules = Arrays.asList(new LengthValidator(), new ContainsUpperCaseValidator(), new ContainsNumberValidator());
-
-        //List for checking atLeast mandatory validation
-        List<PasswordValidatorRule> mandatoryRules = Arrays.asList(new NullOrEmptyValidator(), new ContainsLowerCaseValidator());
+    public boolean validate(String password) throws PasswordValidationException {
 
         for (PasswordValidatorRule validator : mandatoryRules) {
             validator.validate(password);
@@ -34,7 +40,7 @@ public class PasswordValidationService {
                 validator.validate(password);
                 count++;
             } catch (PasswordValidationException e) {
-                log.info("in exception");
+                log.error("in exception");
             }
         }
         return count >= 1;

@@ -2,9 +2,19 @@ package com.validate.password.service;
 
 import com.validate.password.exception.PasswordValidationException;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 class PasswordValidationServiceTests {
+
+    private PasswordValidationService passwordValidationService;
+
+    @BeforeEach
+    void setUp(){
+        passwordValidationService = new PasswordValidationService();
+    }
 
     @Test
     void contextLoads() {
@@ -12,64 +22,62 @@ class PasswordValidationServiceTests {
 
     @Test()
     public void validatePasswordValidationSuccessTest() throws PasswordValidationException {
-        Assertions.assertTrue(PasswordValidationService.validate("passwordA123"));
+        Assertions.assertTrue(passwordValidationService.validate("passwordA123"));
     }
 
     @Test()
     public void passwordIsNullFailureTest() throws PasswordValidationException {
-
-        PasswordValidationException expectedException = new PasswordValidationException("Password cannot be Null or Empty.");
         PasswordValidationException resultException = Assertions.assertThrows(PasswordValidationException.class, () -> {
-            PasswordValidationService.validate("");
+            passwordValidationService.validate("");
 
         });
-        Assertions.assertEquals(expectedException.getMessage(), resultException.getMessage());
+        assertThat("Password cannot be Null or Empty.").isEqualTo(resultException.getMessage());
     }
 
     @Test()
     public void passwordNoLowercaseFailureTest() throws PasswordValidationException {
 
-        PasswordValidationException expectedException = new PasswordValidationException("Password should have one lowercase letter at least.");
         PasswordValidationException resultException = Assertions.assertThrows(PasswordValidationException.class, () -> {
-            PasswordValidationService.validate("PASSWORD!@");
+            passwordValidationService.validate("PASSWORD!@");
 
         });
-        Assertions.assertEquals(expectedException.getMessage(), resultException.getMessage());
+
+        assertThat("Password should have one lowercase letter at least.").isEqualTo(resultException.getMessage());
     }
 
     @Test()
     public void passwordLengthAndNumberFalseTest() throws PasswordValidationException {
-        Assertions.assertTrue(PasswordValidationService.validate("passA"));
+        Assertions.assertTrue(passwordValidationService.validate("passA"));
     }
 
     @Test()
     public void passwordLengthAndUpperCaseFalseTest() throws PasswordValidationException {
-        Assertions.assertTrue(PasswordValidationService.validate("pass12"));
+        Assertions.assertTrue(passwordValidationService.validate("pass12"));
     }
 
     @Test()
     public void passwordNumberAndUpperCaseFalseTest() throws PasswordValidationException {
-        Assertions.assertTrue(PasswordValidationService.validate("validator@!"));
+        Assertions.assertTrue(passwordValidationService.validate("validator@!"));
     }
 
     @Test()
     public void passwordUpperCaseFalseTest() throws PasswordValidationException {
-        Assertions.assertTrue(PasswordValidationService.validate("validator@12"));
+        Assertions.assertTrue(passwordValidationService.validate("validator@12"));
     }
 
     @Test()
     public void passwordNumberFalseTest() throws PasswordValidationException {
-        Assertions.assertTrue(PasswordValidationService.validate("validator@A!"));
+        Assertions.assertTrue(passwordValidationService.validate("validator@A!"));
     }
 
     @Test()
     public void passwordLengthFalseTest() throws PasswordValidationException {
-        Assertions.assertTrue(PasswordValidationService.validate("passA12"));
+        Assertions.assertTrue(passwordValidationService.validate("passA12"));
     }
 
     @Test()
     public void atLeastOneConditionFailureTest() throws PasswordValidationException {
-        Assertions.assertFalse(PasswordValidationService.validate("pass"));
+        Assertions.assertFalse(passwordValidationService.validate("pass"));
     }
 
 }
